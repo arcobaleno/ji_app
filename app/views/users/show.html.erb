@@ -1,0 +1,28 @@
+<% provide(:title, full_name(@user)) %>
+
+<div class="row">
+	<%-# User Profile Picture -%>
+	<aside class="span2">
+		<%= image_tag @user.avatar_url.to_s, :id => 'profile' %>
+	</aside>
+	<%-# User contact Information-%>
+	<aside class="span4">
+		<section>
+			<p>
+			<h1>
+				<%= full_name(@user) %>
+			</h1>
+		    </p>
+
+			<h4>
+				Email: <%= @user.email %>
+			</h4>
+
+		    <p>
+		    <h4>
+				<%= link_to "Update Profile", edit_user_path %>
+			</h4>
+		    </p>
+		</section>
+	</aside>
+</div>
