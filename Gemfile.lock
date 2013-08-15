@@ -134,6 +134,7 @@ GEM
     multi_json (1.7.9)
     multi_test (0.0.2)
     netrc (0.7.7)
+    newrelic_rpm (3.6.6.147)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     paperclip (3.5.1)
@@ -250,6 +251,7 @@ DEPENDENCIES
   guard-livereload
   heroku
   jquery-rails (= 2.0.2)
+  newrelic_rpm
   paperclip (~> 3.0)
   pg
   rack-livereload
