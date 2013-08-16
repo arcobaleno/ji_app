@@ -4,7 +4,7 @@
         <th rowspan="2" style="width:50px; height:30px;"><%= image_tag user.avatar_url.to_s, :id => 'profile' %></th>
 		<th>Name:</th>
         <th>Email:</th>
-        <% if current_user.admin? && !current_user?(user) %>
+        <% if current_user.user_type == 4 && !current_user?(user) %>
         <th>Delete Account:</th>
         <% end %>
 	</tr>
@@ -13,7 +13,7 @@
         <td>
             <%= user.email %>
         </td>
-        <% if current_user.admin? && !current_user?(user) %>
+        <% if current_user.user_type == 4 && !current_user?(user) %>
         <td> <%= link_to "delete", user, method: :delete, data: { confirm: "you sure?" } %></td>
         <% end %>
     </tr>

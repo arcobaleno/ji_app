@@ -23,8 +23,18 @@
 						</li>
 						<% end %>
 						<% if signed_in? %>
-							<li><%= link_to "Gametime", '/game ' %></li>
+							<% if current_user.user_type == 1 %>
 							<li><%= link_to "Profile", current_user %></li>
+							<% end %>
+							<% if current_user.user_type == 2 %>
+							<li><%= link_to "Profile", current_user %></li>
+							<% end %>
+							<% if current_user.user_type == 3 %>
+							<li><%= link_to "Profile", show_banker_users_path %></li>
+							<% end %>
+							<% if current_user.user_type == 4 %>
+							<li><%= link_to "Profile", current_user %></li>
+							<% end %>
 							<li><%= link_to "Users", users_path %></li>
 							<li id="fat-menu" class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">

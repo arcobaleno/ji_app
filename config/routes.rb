@@ -2,9 +2,16 @@ JiApp::Application.routes.draw do
 
   root :to => 'static_pages#home'
 
-  resources :users
+  resources :users do
+      collection do
+      get :show_banker
+    end
+  end
 
   resources :sessions, only: [:new, :create, :destroy]
+
+  # Routes for Credit System
+  resources :credits
 
   #Custom Routes for User Accounts
 
