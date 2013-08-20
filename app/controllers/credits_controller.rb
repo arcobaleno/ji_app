@@ -1,7 +1,8 @@
 class CreditsController < ApplicationController
+	helper_method :sort_column, :sort_direction
 
 	def index
-		@credits = Credit.paginate(page: params[:page]).includes(:user)
+		@credits = Credit.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
 	end
 
 	def new
@@ -43,5 +44,15 @@ class CreditsController < ApplicationController
 		Credit.find(params[:id]).destroy
     	flash[:success] = "Credit Deleted!"
     	redirect_to credits_path
+	end
+
+	private
+
+	def sort_column
+		params[:sort] || "id"
+	end
+
+	def sort_direction
+		params[:direction] || "asc"
 	end
 end

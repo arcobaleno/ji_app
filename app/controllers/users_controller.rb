@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.paginate(page: params[:page])
-    #Banker Function
+  #Banker Function
     @vendors = User.find_all_by_user_type(2)
   end
 
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   def show_banker
     @user = User.find(current_user)
     @total_credits = Credit.all.count
-    @credits_in_bank = Credit.find_all_by_user_id(3).count
+    @credits_in_bank = Credit.find_all_by_user_id(1).count
     @vendors = User.find_all_by_user_type(2)
     @credits_in_vendors = Credit.find_all_by_user_id(@vendors).count
     @players = User.find_all_by_user_type(1)
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
     @credits_in_pools = Credit.find_all_by_pool_id(!nil).count
   end
 
-    #Vendor Account Actions:
+  #Vendor Account Actions:
   def show_vendor
     @user = User.find(current_user)
     @vendor_credits = Credit.find_all_by_user_id(current_user)
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 
   def transfer
     @user = User.find(params[:id])
-    @credits = Credit.find_all_by_user_id(3)
+    @credits = Credit.find_all_by_user_id(1)
     @credit = @credits.first
     @credit.user_id = @user.id
     @credit.save

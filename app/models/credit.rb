@@ -3,4 +3,12 @@ class Credit < ActiveRecord::Base
 	belongs_to :user
 	#belongs_to :pool
 	
+	def self.search(search)
+		if search
+			where('credit_code LIKE ?', "%#{search}%")
+		else
+			scoped
+		end
+	end
+
 end
