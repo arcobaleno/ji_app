@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers, :show_banker]
+  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, :following, :followers, :show_banker, :show_vendor]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: :destroy
   before_filter :banker_user,    only: :show_banker
+  before_filter :vendor_user,    only: :show_vendor
 
   def index
     @users = User.paginate(page: params[:page])
+    #Banker Function
+    @vendors = User.find_all_by_user_type(2)
   end
 
   def new
@@ -25,6 +28,9 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
+    @player_credits = Credit.find(:all, :conditions => {:user_id => current_user.id, :pool_id => nil}).count
+    @pool_credits = Credit.find(:all, :conditions => {:user_id => current_user.id, :pool_id => !nil}).count
+    @credit_code = Credit.find_by_credit_code(:credit_code)
   end
 
   def edit
@@ -60,6 +66,25 @@ class UsersController < ApplicationController
     @credits_in_pools = Credit.find_all_by_pool_id(!nil).count
   end
 
+    #Vendor Account Actions:
+  def show_vendor
+    @user = User.find(current_user)
+    @vendor_credits = Credit.find_all_by_user_id(current_user)
+    @vendor_credit_count = @vendor_credits.count
+    @vendor_credit_first = @vendor_credits.first
+    @credit_code = @vendor_credit_first.credit_code
+  end
+
+  def transfer
+    @user = User.find(params[:id])
+    @credits = Credit.find_all_by_user_id(3)
+    @credit = @credits.first
+    @credit.user_id = @user.id
+    @credit.save
+    flash[:success] = "transfer should work"
+    redirect_to show_banker_users_path
+  end
+
   private
 
   def correct_user
@@ -73,6 +98,10 @@ class UsersController < ApplicationController
 
   def banker_user
     redirect_to root_path unless current_user.user_type == 3
+  end
+
+  def vendor_user
+    redirect_to root_path unless current_user.user_type == 2
   end
   
 end

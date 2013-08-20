@@ -12,10 +12,10 @@ class CreditsController < ApplicationController
 		@credit = Credit.new(params[:credit])
 		if @credit.save
 			flash[:success] = "Credit Created!"
-			redirect_to root_path
+			redirect_to credits_path
 		else
 			flash[:error] = "Credit Not Created!"
-			redirect_to root_path
+			redirect_to credits_path
 		end
 	end
 
@@ -24,7 +24,8 @@ class CreditsController < ApplicationController
 	end
 
 	def update
-		@credit = Credit.find(params[:id])
+		@credit = Credit.find_by_credit_code(@credit_code)
+		@credit.user_id = current_user.user_id
 		if @credit.update_attributes(params[:credit])
 	        flash[:success] = "Credit Info Updated!"
 	        redirect_to root_path
@@ -41,6 +42,6 @@ class CreditsController < ApplicationController
 	def destroy
 		Credit.find(params[:id]).destroy
     	flash[:success] = "Credit Deleted!"
-    	redirect_to root_path
+    	redirect_to credits_path
 	end
 end

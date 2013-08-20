@@ -27,7 +27,7 @@
 							<li><%= link_to "Profile", current_user %></li>
 							<% end %>
 							<% if current_user.user_type == 2 %>
-							<li><%= link_to "Profile", current_user %></li>
+							<li><%= link_to "Profile", show_vendor_users_path %></li>
 							<% end %>
 							<% if current_user.user_type == 3 %>
 							<li><%= link_to "Profile", show_banker_users_path %></li>

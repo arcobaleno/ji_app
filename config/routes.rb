@@ -4,8 +4,12 @@ JiApp::Application.routes.draw do
 
   resources :users do
       collection do
-      get :show_banker
-    end
+        get :show_banker
+        get :show_vendor
+      end
+      member do
+        put :transfer
+      end
   end
 
   resources :sessions, only: [:new, :create, :destroy]
