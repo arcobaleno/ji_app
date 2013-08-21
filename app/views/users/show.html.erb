@@ -46,11 +46,11 @@
 <div class="row">
 	<aside class="span6">
 		<div class="credit_redeem">
-			<h3>Redeem Code Here</h3>
+			<h3 class="redeem_label">Redeem Code Here</h3>
 			<%= form_tag redeem_credits_path, :method => 'get' do %>
 			<p>
-			<%= text_field_tag :search, params[:search] %>
-			<%= submit_tag "Redeem", :id => nil %>
+			<%= text_field_tag :search, params[:search], :class => 'credit_redeem_form' %>
+			<%= submit_tag "Redeem", :class => 'redeem_button' %>
 			</p>
 			<% end %>
 

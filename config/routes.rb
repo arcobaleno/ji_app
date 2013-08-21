@@ -19,6 +19,14 @@ JiApp::Application.routes.draw do
 
   resources :redeem_credits
 
+  # Routes for Game System
+
+  resources :games do
+    resources :pools do
+      resources :players
+    end
+  end
+
   #Custom Routes for User Accounts
 
   match '/signup',  to: 'users#new'

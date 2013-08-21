@@ -59,7 +59,8 @@ class UsersController < ApplicationController
   def show_banker
     @user = User.find(current_user)
     @total_credits = Credit.all.count
-    @credits_in_bank = Credit.find_all_by_user_id(3).count
+    @bankers = User.find_all_by_user_type(3)
+    @credits_in_bank = Credit.find_all_by_user_id(@bankers).count
     @vendors = User.find_all_by_user_type(2)
     @credits_in_vendors = Credit.find_all_by_user_id(@vendors).count
     @players = User.find_all_by_user_type(1)
