@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   def show_banker
     @user = User.find(current_user)
     @total_credits = Credit.all.count
-    @credits_in_bank = Credit.find_all_by_user_id(1).count
+    @credits_in_bank = Credit.find_all_by_user_id(3).count
     @vendors = User.find_all_by_user_type(2)
     @credits_in_vendors = Credit.find_all_by_user_id(@vendors).count
     @players = User.find_all_by_user_type(1)
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
 
   def transfer
     @user = User.find(params[:id])
-    @credits = Credit.find_all_by_user_id(1)
+    @credits = Credit.find_all_by_user_id(3)
     @credit = @credits.first
     @credit.user_id = @user.id
     @credit.save

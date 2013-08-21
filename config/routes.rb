@@ -17,6 +17,8 @@ JiApp::Application.routes.draw do
   # Routes for Credit System
   resources :credits
 
+  resources :redeem_credits
+
   #Custom Routes for User Accounts
 
   match '/signup',  to: 'users#new'

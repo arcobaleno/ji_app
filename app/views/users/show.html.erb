@@ -47,6 +47,13 @@
 	<aside class="span6">
 		<div class="credit_redeem">
 			<h3>Redeem Code Here</h3>
+			<%= form_tag redeem_credits_path, :method => 'get' do %>
+			<p>
+			<%= text_field_tag :search, params[:search] %>
+			<%= submit_tag "Redeem", :id => nil %>
+			</p>
+			<% end %>
+
 		</div>
 	</aside>
 </div>
