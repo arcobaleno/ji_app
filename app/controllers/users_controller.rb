@@ -4,9 +4,10 @@ class UsersController < ApplicationController
   before_filter :admin_user,     only: :destroy
   before_filter :banker_user,    only: :show_banker
   before_filter :vendor_user,    only: :show_vendor
+  helper_method :sort_column, :sort_direction
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
   #Banker Function
     @vendors = User.find_all_by_user_type(2)
   end
@@ -102,6 +103,14 @@ class UsersController < ApplicationController
 
   def vendor_user
     redirect_to root_path unless current_user.user_type == 2
+  end
+
+  def sort_column
+    params[:sort] || "first_name"
+  end
+
+  def sort_direction
+    params[:direction] || "asc"
   end
   
 end

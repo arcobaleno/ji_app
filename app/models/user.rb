@@ -13,6 +13,14 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   validates :password_confirmation, presence: true
 
+  def self.search(search)
+    if search
+      where('first_name LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
+
   require 'carrierwave/orm/activerecord'
     mount_uploader :avatar, AvatarUploader
 
