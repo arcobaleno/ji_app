@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130821194339) do
+ActiveRecord::Schema.define(:version => 20130823191311) do
 
   create_table "credits", :force => true do |t|
     t.integer  "user_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20130821194339) do
 
   create_table "games", :force => true do |t|
     t.integer  "user_id"
-    t.string   "type"
+    t.string   "sport"
     t.string   "team_one"
     t.string   "team_two"
     t.integer  "team_one_score"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20130821194339) do
     t.string   "winner"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "date"
+    t.time     "time"
   end
 
   create_table "players", :force => true do |t|
@@ -42,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20130821194339) do
     t.boolean  "winner",                   :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "bet"
   end
 
   create_table "pools", :force => true do |t|
@@ -53,6 +56,15 @@ ActiveRecord::Schema.define(:version => 20130821194339) do
     t.integer  "max_players"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "prizes", :force => true do |t|
+    t.integer "user_id"
+    t.integer "value"
+    t.integer "prize_type"
+    t.string  "description"
+    t.integer "redeemed"
+    t.integer "mailed"
   end
 
   create_table "users", :force => true do |t|

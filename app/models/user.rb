@@ -1,6 +1,10 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :last_name, :first_name, :password, :password_confirmation, :user_type, :avatar, :status, :created_at, :updated_at
   has_many :credits
+  has_many :games
+  has_many :pools
+  has_many :players
+  has_many :prizes
 
   has_secure_password #Rails 3 helper method to require/encrpypt password and password confirmation using password digest
 

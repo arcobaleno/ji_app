@@ -30,7 +30,8 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     @player_credits = Credit.find(:all, :conditions => {:user_id => current_user.id, :pool_id => nil}).count
-    @pool_credits = Credit.find(:all, :conditions => {:user_id => current_user.id, :pool_id => !nil}).count
+    @players = current_user.players
+    @pool_credits = @players.sum(:bet)
     @credit_code = Credit.find_by_credit_code(:credit_code)
   end
 
@@ -65,7 +66,7 @@ class UsersController < ApplicationController
     @credits_in_vendors = Credit.find_all_by_user_id(@vendors).count
     @players = User.find_all_by_user_type(1)
     @credits_in_players = Credit.find_all_by_user_id(@players).count
-    @credits_in_pools = Credit.find_all_by_pool_id(!nil).count
+    @credits_in_pools = Credit.find_all_by_user_id(nil).count
   end
 
   #Vendor Account Actions:

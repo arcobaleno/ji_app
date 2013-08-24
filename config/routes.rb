@@ -23,7 +23,19 @@ JiApp::Application.routes.draw do
 
   resources :games do
     resources :pools do
-      resources :players
+      resources :players do
+         member do
+          put :payout
+        end
+      end
+    end
+  end
+
+  # Routes for Prize System
+
+  resources :prizes do
+    member do 
+      put :redeem_prize
     end
   end
 
