@@ -46,6 +46,40 @@ class CreditsController < ApplicationController
     	redirect_to credits_path
 	end
 
+	# Custom Actions
+
+	def transfer
+	    @user = User.find(params[:id])
+	    @credits = Credit.find_all_by_user_id(3)
+	    @credit = @credits.first
+	    @credit.user_id = @user.id
+	    @credit.save
+	    flash[:success] = "transfer should work"
+	    redirect_to show_banker_users_path
+ 	end
+
+	def payout
+		@player = Player.find_by_id(params[:id])
+		@pool = Pool.find_by_id(@player.pool_id)
+		@game = Game.find_by_id(@pool.game_id)
+		@credits = Credit.find_all_by_pool_id(@pool)
+		@pay_one_credit = @credits.first
+		@pay_one_credit.user_id = @player.user_id
+		@pay_one_credit.pool_id = nil
+		if @pay_one_credit.save
+			@player.destroy
+			flash[:success] = "Credit Paid Out"
+			redirect_to game_pool_path(@game,@pool)
+		else
+			flash[:notice] = "Credit not Paid Out"
+			redirect_to game_pool_path(@game,@pool)
+		end
+	end
+
+	def redeem_credits
+
+	end
+
 	private
 
 	def sort_column

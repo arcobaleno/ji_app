@@ -78,16 +78,6 @@ class UsersController < ApplicationController
     @credit_code = @vendor_credit_first.credit_code
   end
 
-  def transfer
-    @user = User.find(params[:id])
-    @credits = Credit.find_all_by_user_id(3)
-    @credit = @credits.first
-    @credit.user_id = @user.id
-    @credit.save
-    flash[:success] = "transfer should work"
-    redirect_to show_banker_users_path
-  end
-
   private
 
   def correct_user
