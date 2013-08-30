@@ -3,19 +3,22 @@ JiApp::Application.routes.draw do
   root :to => 'static_pages#home'
 
   resources :users do
-      collection do
-        get :show_banker
-        get :show_vendor
-      end
-      member do
-        put :transfer
-      end
+    collection do
+      get :show_banker
+      get :show_vendor
+    end
   end
 
   resources :sessions, only: [:new, :create, :destroy]
 
   # Routes for Credit System
-  resources :credits
+  
+  resources :credits do 
+    member do
+        put :transfer
+        put :payout
+    end
+  end
 
   resources :redeem_credits
 
@@ -23,11 +26,7 @@ JiApp::Application.routes.draw do
 
   resources :games do
     resources :pools do
-      resources :players do
-         member do
-          put :payout
-        end
-      end
+      resources :players
     end
   end
 

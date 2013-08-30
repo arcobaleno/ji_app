@@ -34,25 +34,6 @@ class PlayersController < ApplicationController
 		end
 	end
 
-	def payout
-		@game = Game.find(params[:game_id])
-		@player = Player.find_by_id(params[:id])
-		@user = @player.user_id
-		@pool = Pool.find_all_by_id(params[:pool_id])
-		@credits = Credit.find_all_by_pool_id(@pool)
-		@pay_one_credit = @credits.first
-		@pay_one_credit.user_id = @user
-		@pay_one_credit.pool_id = nil
-		if @pay_one_credit.save
-			@player.destroy
-			flash[:success] = "Credit Paid Out"
-			redirect_to game_pool_path(@game,@pool)
-		else
-			flash[:notice] = "Credit not Paid Out"
-			redirect_to game_pool_path(@game,@pool)	
-		end
-	end
-
 	def edit
 	end
 
