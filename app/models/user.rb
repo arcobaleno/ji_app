@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_many :pools
   has_many :players
   has_many :prizes
+  has_many :addresses
 
   has_secure_password #Rails 3 helper method to require/encrpypt password and password confirmation using password digest
 

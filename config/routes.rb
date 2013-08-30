@@ -39,6 +39,8 @@ JiApp::Application.routes.draw do
     end
   end
 
+  resources :addresses
+
   #Custom Routes for User Accounts
 
   match '/signup',  to: 'users#new'
