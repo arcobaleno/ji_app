@@ -17,10 +17,9 @@ JiApp::Application.routes.draw do
     member do
         put :transfer
         put :payout
+        put :redeem_credits
     end
   end
-
-  resources :redeem_credits
 
   # Routes for Game System
 
@@ -45,6 +44,8 @@ JiApp::Application.routes.draw do
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+
+  match '/permission', to: 'static_pages#permission'
 
   match '/game', to: 'static_pages#game'
 

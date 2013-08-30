@@ -7,9 +7,13 @@ class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
+    if admin?
     @users = User.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
-  #Banker Function
+    #Banker Function
     @vendors = User.find_all_by_user_type(2)
+    else
+      redirect_to permission_path
+    end
   end
 
   def new
@@ -33,6 +37,10 @@ class UsersController < ApplicationController
     @players = current_user.players
     @pool_credits = @players.sum(:bet)
     @credit_code = Credit.find_by_credit_code(:credit_code)
+
+    # JSON
+    # render json: {user: @user, player_credits: @player_credits, pool_credits: @pool_credits, credit_code: @credit_code}
+    # @credit_code = input
   end
 
   def edit

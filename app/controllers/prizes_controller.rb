@@ -6,7 +6,11 @@ class PrizesController < ApplicationController
 	end
 
 	def new
-		@prize = Prize.new
+		if admin?
+			@prize = Prize.new
+		else
+			redirect_to permission_path
+		end
 	end
 
 	def create
