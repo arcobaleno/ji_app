@@ -2,14 +2,23 @@ class AddressesController < ApplicationController
 
 	def index
 		@addresses = Address.all
+
+		# JSON
+		# render json: @addresses
 	end
 
 	def show
 		@address = Address.find(params[:id])
+
+		# JSON
+		# render json: @address
 	end
 
 	def new
 		@address = Address.new
+
+		# JSON
+		# render json: @address
 	end
 
 	def create
@@ -21,6 +30,9 @@ class AddressesController < ApplicationController
 			flash[:error] = "Address not Saved, Try Again"
 			redirect_to root_path
 		end
+
+		# JSON
+		# render json: @address
 	end
 
 	def edit

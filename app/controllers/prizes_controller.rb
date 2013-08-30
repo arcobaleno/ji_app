@@ -3,6 +3,9 @@ class PrizesController < ApplicationController
 	def index
 		@prizes_available = Prize.find_all_by_redeemed(0)
 		@prizes_redeemed = Prize.find_all_by_redeemed(1)
+
+		# JSON
+		# render json: {prizes_available: @prizes_available, prizes_redeemed: @prizes_redeemed}
 	end
 
 	def new
@@ -26,6 +29,9 @@ class PrizesController < ApplicationController
 
 	def show
 		@prize = Prize.find_by_id(params[:id])
+
+		# JSON
+		# render json: @prize
 	end
 
 	def redeem_prize
@@ -43,6 +49,9 @@ class PrizesController < ApplicationController
 			flash[:error] = "Prize not Redeemed!"
 			redirect_to prizes_path
 		end
+
+		# JSON
+		# render json: {credits: @credits, credit: @credit, banker: @banker, prize: @prize}
 	end
 
 	def edit

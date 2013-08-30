@@ -92,6 +92,9 @@ class CreditsController < ApplicationController
 		flash[:error] = "Credit code invalid"
 		redirect_to current_user	
 		end
+
+		# JSON
+		# render json: {credits: @credits, credit_redeemed: @credit_redeemed}
 	end
 
 	private

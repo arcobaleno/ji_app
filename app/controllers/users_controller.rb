@@ -18,7 +18,11 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+
+  # JSON
+  # render json: @user
   end
+  
 
   def create
     @user = User.new(params[:user])
@@ -29,6 +33,9 @@ class UsersController < ApplicationController
        flash[:error] = "User Account Not Created, Please Try Again!"
        redirect_to root_path
     end
+
+    # JSON
+    # render json: @user
   end
 
   def show
@@ -45,6 +52,9 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+
+    # JSON
+    # render json: @user
   end
 
   def update
@@ -56,6 +66,9 @@ class UsersController < ApplicationController
     else
         render 'edit'
     end
+
+    # JSON
+    # render json: @user
   end
 
   def destroy

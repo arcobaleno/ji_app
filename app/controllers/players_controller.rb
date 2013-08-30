@@ -2,6 +2,9 @@ class PlayersController < ApplicationController
 
 	def index
 		@players = Player.find_all_by_pool_id(params[:pool_id])
+
+		# JSON
+		# render json: @players
 	end
 
 	def new
@@ -11,6 +14,9 @@ class PlayersController < ApplicationController
 		@player = Player.find_by_id(params[:id])
 		@pool = Pool.find_by_id(params[:pool_id])
 		@game = Game.find_by_id(params[:game_id], :include => [{ :pools => :user }])
+
+		# JSON
+		# render json: {player: @player, pool: @pool, game: @game}
 	end
 
 	def create

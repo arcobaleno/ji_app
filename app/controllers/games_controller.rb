@@ -2,6 +2,9 @@ class GamesController < ApplicationController
 
 	def index
 		@games = Game.paginate(page: params[:page])
+
+		# JSON
+		# render json: @games
 	end
 
 	def new
@@ -14,6 +17,9 @@ class GamesController < ApplicationController
 
 	def show
 		@game = Game.find_by_id(params[:id])
+
+		# JSON
+		# render json: @game
 	end
 
 	def create
