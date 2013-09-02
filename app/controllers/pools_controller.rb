@@ -38,7 +38,7 @@ class PoolsController < ApplicationController
 		end
 
 		# JSON
-		render json: {game: @game, pool: @pool}
+		#render json: {game: @game, pool: @pool}
 	end
 
 	def edit
