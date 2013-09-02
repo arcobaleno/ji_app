@@ -54,7 +54,7 @@ class CreditsController < ApplicationController
 
 	def transfer
 	    @user = User.find(params[:id])
-	    @credits = Credit.find_all_by_user_type(3)
+	    @credits = Credit.find_all_by_user_id(1)
 	    @credit = @credits.first
 	    @credit.user_id = @user.id
 	    @credit.save
