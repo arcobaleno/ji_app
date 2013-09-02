@@ -30,8 +30,7 @@ class UsersController < ApplicationController
        sign_in @user
        redirect_to @user
     else
-       flash[:error] = "User Account Not Created, Please Try Again!"
-       redirect_to root_path
+       render 'new'
     end
 
     # JSON

@@ -4,4 +4,7 @@ class Player < ActiveRecord::Base
 	belongs_to :game
 	belongs_to :user
 
+	validates :team_one_predicted_score, presence: true
+	validates :team_two_predicted_score, presence: true
+
 end
